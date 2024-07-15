@@ -11,5 +11,5 @@ class MovingAverageCrossoverAgent(TradingAgent):
         if data['SMA50'].iloc[-1] > data['SMA200'].iloc[-1]:
             return 1 # Buy signal
         elif data['SMA50'].iloc[-1] < data['SMA200'].iloc[-1]:
-            return -1 # Sell signal
+            return 2 # Sell signal
         return 0 # Hold
