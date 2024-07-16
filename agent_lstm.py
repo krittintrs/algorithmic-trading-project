@@ -3,7 +3,8 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
-from keras.layers import LSTM, Dense
+from keras.layers import LSTM, Dense, Dropout
+from keras.optimizers import Adam
 
 class LSTMAgent(TradingAgent):
     def __init__(self, time_step=50, initial_cash=100000):
@@ -14,11 +15,16 @@ class LSTMAgent(TradingAgent):
 
     def build_model(self):
         model = Sequential()
-        model.add(LSTM(50, return_sequences=True, input_shape=(self.time_step, 1)))
-        model.add(LSTM(50, return_sequences=False))
-        model.add(Dense(25))
+        model.add(LSTM(100, return_sequences=True, input_shape=(self.time_step, 1)))
+        model.add(Dropout(0.2))
+        model.add(LSTM(100, return_sequences=True))
+        model.add(Dropout(0.2))
+        model.add(LSTM(100, return_sequences=False))
+        model.add(Dropout(0.2))
+        model.add(Dense(50, activation='relu'))
         model.add(Dense(1))
-        model.compile(optimizer='adam', loss='mean_squared_error')
+        optimizer = Adam(learning_rate=0.001)
+        model.compile(optimizer=optimizer, loss='mean_squared_error')
         return model
 
     def train_model(self, data):
@@ -33,7 +39,7 @@ class LSTMAgent(TradingAgent):
         X, y = np.array(X), np.array(y)
         X = np.reshape(X, (X.shape[0], X.shape[1], 1))
 
-        self.model.fit(X, y, batch_size=1, epochs=1)
+        self.model.fit(X, y, batch_size=32, epochs=50, validation_split=0.2)
     
     def generate_signals(self, data):
         data = data.copy()
