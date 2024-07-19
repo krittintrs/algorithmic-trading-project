@@ -31,7 +31,7 @@ def train_test_split(data, test_size=0.4):
 
 # Backtesting function
 def backtest(agent, data):
-    agent.train_model(data)
+    #agent.train_model(data)
     portfolio_values = []  # List to store portfolio values over time
     
     for timestamp, row in data.iterrows():
@@ -57,8 +57,11 @@ def run_backtesting(symbol, interval, agent_class):
     train_data, test_data = train_test_split(df)
 
     agent = agent_class()
-
+    agent.train_model(train_data)
     train_portfolio_values, train_portfolio_value = backtest(agent, train_data)
+    agent.cash=100000
+    agent.holdings=0
+    agent.position=0
     test_portfolio_values, test_portfolio_value = backtest(agent, test_data)
 
     train_metrics = calculate_metrics(train_portfolio_values)
