@@ -2,6 +2,7 @@ from agent_super import TradingAgent
 class RSIAgent(TradingAgent):
     def __init__(self, window=14, initial_cash=100000):
         super().__init__(initial_cash)
+        self.name="RSI"
         self.window = window
 
     def calculate_rsi(self, data):
@@ -18,7 +19,7 @@ class RSIAgent(TradingAgent):
         data['RSI'] = self.calculate_rsi(data)
 
         if data['RSI'].iloc[-1] < 30:
-            return 2  # Buy signal
+            return 1  # Buy signal
         elif data['RSI'].iloc[-1] > 70:
-            return 1  # Sell signal
+            return 2  # Sell signal
         return 0  # Hold

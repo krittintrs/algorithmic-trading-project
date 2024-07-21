@@ -6,6 +6,7 @@ import numpy as np
 class DecisionTreeAgent(TradingAgent):
     def __init__(self, short_window=100, initial_cash=100000):
         super().__init__(initial_cash)
+        self.name="DT"
         self.short_window = short_window  # Use the last 100 observations
 
     def train_model(self, data):

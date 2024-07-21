@@ -6,6 +6,7 @@ import numpy as np
 class RandomForestAgent(TradingAgent):
     def __init__(self, short_window=50, long_window=200, initial_cash=100000):
         super().__init__(initial_cash)
+        self.name="RF"
         self.short_window = short_window
         self.long_window = long_window
     

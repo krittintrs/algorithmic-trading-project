@@ -8,6 +8,7 @@ import numpy as np
 class PCAAgent(TradingAgent):
     def __init__(self, short_window=50, long_window=200, initial_cash=100000, n_components=3):
         super().__init__(initial_cash)
+        self.name="PCA"
         self.short_window = short_window
         self.long_window = long_window
         self.n_components = n_components  # Number of PCA components

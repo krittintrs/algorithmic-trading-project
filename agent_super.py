@@ -23,15 +23,15 @@ class TradingAgent:
                 self.holdings = self.cash / price
                 self.cash = 0
                 self.position = 1
-                #print(f"{pd.Timestamp.now()}: {self.name} Buy at {price}")
+                print(f"{pd.Timestamp.now()}: {self.name} Buy at {price}")
         elif signal == 2 and self.position != -1:
             if self.holdings > 0:
                 self.cash = self.holdings * price
                 self.holdings = 0
                 self.position = -1
-                #print(f"{pd.Timestamp.now()}: {self.name} Sell at {price}")
+                print(f"{pd.Timestamp.now()}: {self.name} Sell at {price}")
         else:
-            #print(f"{pd.Timestamp.now()}: {self.name} Hold")
+            print(f"{pd.Timestamp.now()}: {self.name} Hold")
             pass
 
     def get_portfolio_value(self, current_price):

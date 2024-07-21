@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import time
-from agent_hmm1 import HMMAgent
+from agent_hmm import HMMAgent
 import warnings
 warnings.filterwarnings("ignore")
 # Function to fetch historical data

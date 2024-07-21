@@ -9,6 +9,7 @@ import pandas as pd
 class HMMAgent(TradingAgent):
     def __init__(self, short_window=50, long_window=200, initial_cash=100000, n_components=4):
         super().__init__(initial_cash)
+        self.name="HMM"
         self.short_window = short_window
         self.long_window = long_window
         self.n_components = n_components  # Number of HMM components
